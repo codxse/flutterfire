@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** FirebaseMessagingPlugin */
-public class FirebaseMessagingPlugin extends BroadcastReceiver
+public class FirebaseMessagingPlugin // extends BroadcastReceiver
     implements MethodCallHandler, NewIntentListener {
   private final Registrar registrar;
   private final MethodChannel channel;
@@ -59,24 +59,24 @@ public class FirebaseMessagingPlugin extends BroadcastReceiver
   }
 
   // BroadcastReceiver implementation.
-  @Override
-  public void onReceive(Context context, Intent intent) {
-    String action = intent.getAction();
+  // @Override
+  // public void onReceive(Context context, Intent intent) {
+  //   String action = intent.getAction();
 
-    if (action == null) {
-      return;
-    }
+  //   if (action == null) {
+  //     return;
+  //   }
 
-    if (action.equals(FlutterFirebaseMessagingService.ACTION_TOKEN)) {
-      String token = intent.getStringExtra(FlutterFirebaseMessagingService.EXTRA_TOKEN);
-      channel.invokeMethod("onToken", token);
-    } else if (action.equals(FlutterFirebaseMessagingService.ACTION_REMOTE_MESSAGE)) {
-      RemoteMessage message =
-          intent.getParcelableExtra(FlutterFirebaseMessagingService.EXTRA_REMOTE_MESSAGE);
-      Map<String, Object> content = parseRemoteMessage(message);
-      channel.invokeMethod("onMessage", content);
-    }
-  }
+  //   if (action.equals(FlutterFirebaseMessagingService.ACTION_TOKEN)) {
+  //     String token = intent.getStringExtra(FlutterFirebaseMessagingService.EXTRA_TOKEN);
+  //     channel.invokeMethod("onToken", token);
+  //   } else if (action.equals(FlutterFirebaseMessagingService.ACTION_REMOTE_MESSAGE)) {
+  //     RemoteMessage message =
+  //         intent.getParcelableExtra(FlutterFirebaseMessagingService.EXTRA_REMOTE_MESSAGE);
+  //     Map<String, Object> content = parseRemoteMessage(message);
+  //     channel.invokeMethod("onMessage", content);
+  //   }
+  // }
 
   @NonNull
   private Map<String, Object> parseRemoteMessage(RemoteMessage message) {
